@@ -21,39 +21,25 @@ do_not_sync
     
     // freopen("input.txt", "r", stdin);
     // freopen("output.txt", "w", stdout);
-    
-    int t;
-    cin >> t;
+    int n, l;   cin >> n >> l;
+    int a[n];   repi(0, n)  cin >> a[i];
 
-    while (t --) {
-        int n;
-        cin >> n;
+    int dp[n]; unordered_set<int> st;
+    dp[n-1] = 1;
+    st.insert(a[n-1]);
 
-        int a[n];
-        repi(0, n)  cin >> a[i];
-
-        int sum = 0, pose = -1, pos1 = -1, pos2 = -1;
-        repi(0, n) {
-            if ((a[i] & 1) == 0)    {
-                pose = i+1;
-                break;
-            }
-            else {
-                sum += a[i];
-                if (pos1 == -1) pos1 = i+1;
-                else pos2 = i+1;
-            }
-
-            if ((sum & 1) == 0) break;
+    repd(n-2, 0) {
+        if (st.find(a[i]) == st.end())  {
+            dp[i] = dp[i+1] + 1;
+            st.insert(a[i]);
         }
+        else    dp[i] = dp[i+1];
 
-        if (pose != -1) cout << 1 << endl << pose << endl;
-        
-        else {
-            if (pos1 != -1 && pos2 != -1)   cout << 2 << endl << pos1 << " " << pos2 << endl;
+    }
 
-            else    cout << -1 << endl;
-        }
+    repi(0, l) {
+        int t;  cin >> t;
+        cout << dp[t-1] << endl;
     }
 
     return 0;

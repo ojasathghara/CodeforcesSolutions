@@ -22,39 +22,34 @@ do_not_sync
     // freopen("input.txt", "r", stdin);
     // freopen("output.txt", "w", stdout);
     
-    int t;
-    cin >> t;
+    int n, k;   cin >> n >> k;
+    int a[n];   repi(0, n)  cin >> a[i];
 
-    while (t --) {
-        int n;
-        cin >> n;
+    if (n == k) {
+        cout << 1 << endl;
+        return 0;
+    }
+    if (k == 1) {
+        int ix = min_element(a, a+n) - a;
+        cout << ix + 1 << endl; 
+        return 0;
+    }
 
-        int a[n];
-        repi(0, n)  cin >> a[i];
+    int mini = INT_MIN, ix = 0, sum = 0;
+    repi(0, k)  sum += a[i];
+    mini = sum;
 
-        int sum = 0, pose = -1, pos1 = -1, pos2 = -1;
-        repi(0, n) {
-            if ((a[i] & 1) == 0)    {
-                pose = i+1;
-                break;
-            }
-            else {
-                sum += a[i];
-                if (pos1 == -1) pos1 = i+1;
-                else pos2 = i+1;
-            }
+    repi(1, n-k+2)  {
+        sum -= a[i-1];
+        sum += a[i+k-1];
 
-            if ((sum & 1) == 0) break;
-        }
-
-        if (pose != -1) cout << 1 << endl << pose << endl;
-        
-        else {
-            if (pos1 != -1 && pos2 != -1)   cout << 2 << endl << pos1 << " " << pos2 << endl;
-
-            else    cout << -1 << endl;
+        if (sum < mini) {
+            mini = sum;
+            ix = i;
         }
     }
+
+    cout << ix+1 << endl;
 
     return 0;
 }
