@@ -1,6 +1,5 @@
 #include"bits/stdc++.h"
 #define do_not_sync ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);
-#define FIO freopen("input.txt", "r", stdin);freopen("output.txt", "w", stdout);
 
 #define pb push_back
 #define eb emplace_back
@@ -22,11 +21,31 @@ using namespace std;
 
 int main(void) {
 do_not_sync
-FIO
-    int n;
-    cin >> n;
+    
+    freopen("input.txt", "r", stdin);
+    freopen("output.txt", "w", stdout);
 
-    cout << n;
+    int dp[10001]; dp[0] = 0;
+    repi(1, 10001) dp[i] = (3*i*i + i)/2;
+
+    repi(0, 10) cout << dp[i] << " ";
+    cout << endl;
+    
+    int t;  cin >> t;
+    while (t --) {
+        int n;  cin >> n;
+
+        int ans = 0;
+        while (n > 1) {
+            int ix = ub(dp, dp+10000, n) - dp;
+            ix --;
+            // cout << ix << " ";
+            n -= dp[ix];
+            ans ++;
+        }
+
+        cout << ans << endl;
+    }
 
     return 0;
 }

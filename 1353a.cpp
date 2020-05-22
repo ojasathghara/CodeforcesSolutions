@@ -22,11 +22,23 @@ using namespace std;
 
 int main(void) {
 do_not_sync
-FIO
-    int n;
-    cin >> n;
+// FIO
+    int t;  cin >> t;
+    while (t--) {
+        long n, m;   cin >> n  >> m;
 
-    cout << n;
+        if (n <= 1) {
+            cout << 0 << endl;
+            continue;
+        }
+
+        if (n == 2) {
+            cout << m << endl;
+            continue;
+        }
+
+        cout << m*2 << endl;
+    }
 
     return 0;
 }

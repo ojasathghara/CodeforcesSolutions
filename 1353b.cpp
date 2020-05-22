@@ -22,11 +22,26 @@ using namespace std;
 
 int main(void) {
 do_not_sync
-FIO
-    int n;
-    cin >> n;
+// FIO
+    int t;  cin >> t;
+    while (t --) {
+        int n, k, sum=0;   cin >> n >> k;
+        
+        vector<int> a(n), b(n);
 
-    cout << n;
+        repi(0, n)  cin >> a[i];
+        repi(0, n)  cin >> b[i];
+
+        sort(a.begin(), a.end());
+        sort(b.rbegin(), b.rend());
+
+        repi(0, n) {
+            if (i < k)  sum += max(a[i], b[i]);
+            else    sum += a[i];
+        }
+
+        cout << sum << endl;
+    }
 
     return 0;
 }
