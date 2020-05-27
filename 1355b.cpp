@@ -1,5 +1,6 @@
 #include"bits/stdc++.h"
 #define do_not_sync ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);
+#define FIO freopen("input.txt", "r", stdin);freopen("output.txt", "w", stdout);
 
 #define pb push_back
 #define eb emplace_back
@@ -18,33 +19,30 @@
 #define mii map<int, int>
 using namespace std;
 
+int solve(int a[], int n) {
+    unordered_map<int, int> freq;
+    repi(0, n)  freq[a[i]]++;
+
+    int count = 0;
+    for (auto& p: freq) {
+        if (p.first <= p.second) {
+            count += (p.second/p.first);
+        }
+    }
+
+    return count;
+}
 
 int main(void) {
 do_not_sync
-    
-    freopen("input.txt", "r", stdin);
-    freopen("output.txt", "w", stdout);
-
-    int dp[10001]; dp[0] = 0;
-    repi(1, 10001) dp[i] = (3*i*i + i)/2;
-
-    repi(0, 10) cout << dp[i] << " ";
-    cout << endl;
-    
+FIO
     int t;  cin >> t;
     while (t --) {
         int n;  cin >> n;
 
-        int ans = 0;
-        while (n > 1) {
-            int ix = ub(dp, dp+10000, n) - dp;
-            ix --;
-            // cout << ix << " ";
-            n -= dp[ix];
-            ans ++;
-        }
+        int a[n];   repi(0, n)  cin >> a[i];
 
-        cout << ans << endl;
+        cout << solve(a, n) << endl;
     }
 
     return 0;

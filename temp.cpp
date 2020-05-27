@@ -23,10 +23,13 @@ using namespace std;
 int main(void) {
 do_not_sync
 FIO
-    int n;
-    cin >> n;
-
-    cout << n;
 
     return 0;
 }
+
+/*
+Notes: 
+    Goal: 
+    Approach: 
+    Extra: 
+*/
