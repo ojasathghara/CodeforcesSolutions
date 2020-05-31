@@ -20,22 +20,44 @@
 #define mii map<int, int>
 using namespace std;
 
-
 int main(void) {
 do_not_sync
-// FIO
-    w(t) {
-        int a;
-        cin >> a;
-        cout << a;
+// FIO 
+    int n;  cin >> n;
+    int a[n];   repi(0, n)  cin >> a[i];
+
+    int k = 0;
+    for (k=1; k<n; k++) {
+        if (a[k-1] > a[k])  break;
     }
+
+    if (k == n) {
+        cout << "yes" << endl << 1 << " " << 1 << endl;
+        return 0;
+    }
+
+    int b[n];   repi(0, n)  b[i] = a[i];
+
+    sort(b, b+n);
+    int pos1 = -1, pos2 = -1;
+
+    repi(0, n) {
+        if (a[i] != b[i]) {
+            if (pos1 == -1) pos1 = i;
+            else pos2 = i; 
+        }
+    }
+
+    reverse(a+pos1, a+pos2+1);
+
+    for (int i=1; i<n; i++) {
+        if (a[i-1] > a[i]) {
+            cout << "no" << endl;
+            return 0;
+        }
+    }
+
+    cout << "yes" << endl << pos1+1 << " " << pos2+1 << endl;
 
     return 0;
 }
-
-/*
-Notes: 
-    Goal: 
-    Approach: 
-    Extra: 
-*/
